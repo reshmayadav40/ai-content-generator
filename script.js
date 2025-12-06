@@ -20,7 +20,7 @@ const generateAIResponse = async (promptText, resultElement, buttonElement) => {
     resultElement.innerText = "";
 
     try {
-        const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
+        const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const response = await model.generateContent(promptText);
 
