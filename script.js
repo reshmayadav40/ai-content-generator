@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
 // ⚠️ Add your API key here
-const ai = new GoogleGenerativeAI("AIzaSyArFgI8kwusujufSgUQhU7MEIEtwQqDKpk");
+const ai = new GoogleGenerativeAI("API-KEY");
 
 // Generate Response
 const generateAIResponse = async (promptText, resultElement, buttonElement) => {
