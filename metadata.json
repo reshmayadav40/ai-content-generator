@@ -1,0 +1,5 @@
+{
+  "name": "Gemini AI Content Generator",
+  "description": "A modern, React-based AI content generation dashboard featuring Ask Me Anything, Text Summarizer, Idea Generator, and Definition Finder tools powered by the Google Gemini API.",
+  "requestFramePermissions": []
+}
