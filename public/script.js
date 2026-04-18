@@ -1,17 +1,10 @@
-import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-// ⚠️ Add your API key here
-const ai = new GoogleGenerativeAI("API-KEY");
-
-// Generate Response
 const generateAIResponse = async (promptText, resultElement, buttonElement) => {
-
     if (!promptText.trim()) {
         alert("Please enter some text!");
         return;
     }
 
-    // Loading UI
     const originalText = buttonElement.innerText;
     buttonElement.innerText = "Generating...";
     buttonElement.disabled = true;
@@ -20,15 +13,25 @@ const generateAIResponse = async (promptText, resultElement, buttonElement) => {
     resultElement.innerText = "";
 
     try {
-        const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+        // Automatically route to the correct backend if you are accidentally using VS Code Live Server
+        const baseUrl = window.location.port === '5500' ? 'http://localhost:3000' : '';
+        
+        const response = await fetch(`${baseUrl}/api/generate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ promptText })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to generate response');
+        }
 
-        const response = await model.generateContent(promptText);
-
-        const text = response.response.text();
-
-        resultElement.innerText = text;
+        resultElement.innerText = data.text;
         resultElement.classList.remove("hidden");
-
     } catch (error) {
         console.error(error);
         resultElement.innerText = "⚠️ Error: " + error.message;
@@ -39,9 +42,6 @@ const generateAIResponse = async (promptText, resultElement, buttonElement) => {
     buttonElement.disabled = false;
 };
 
-// -----------------------------------------------
-// Ask Me Anything
-// -----------------------------------------------
 document.getElementById("ask-btn").addEventListener("click", () => {
     const question = document.getElementById("ask-input").value;
     generateAIResponse(
@@ -51,9 +51,6 @@ document.getElementById("ask-btn").addEventListener("click", () => {
     );
 });
 
-// -----------------------------------------------
-// Summarizer
-// -----------------------------------------------
 document.getElementById("sum-btn").addEventListener("click", () => {
     const text = document.getElementById("sum-input").value;
     generateAIResponse(
@@ -63,9 +60,6 @@ document.getElementById("sum-btn").addEventListener("click", () => {
     );
 });
 
-// -----------------------------------------------
-// Idea Generator
-// -----------------------------------------------
 document.getElementById("idea-btn").addEventListener("click", () => {
     const topic = document.getElementById("idea-input").value;
     generateAIResponse(
@@ -75,9 +69,6 @@ document.getElementById("idea-btn").addEventListener("click", () => {
     );
 });
 
-// -----------------------------------------------
-// Definition Finder
-// -----------------------------------------------
 document.getElementById("def-btn").addEventListener("click", () => {
     const term = document.getElementById("def-input").value;
     generateAIResponse(
@@ -86,3 +77,6 @@ document.getElementById("def-btn").addEventListener("click", () => {
         document.getElementById("def-btn")
     );
 });
+
+
+
