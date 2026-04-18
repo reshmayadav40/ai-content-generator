@@ -5,8 +5,11 @@ const generateAIResponse = async (promptText, resultElement, buttonElement) => {
         return;
     }
 
-    const originalText = buttonElement.innerText;
-    buttonElement.innerText = "Generating...";
+    const textSpan = buttonElement.querySelector('.btn-text');
+    const originalText = textSpan.innerText;
+    
+    textSpan.innerText = "Generating...";
+    buttonElement.style.opacity = "0.7";
     buttonElement.disabled = true;
 
     resultElement.classList.add("hidden");
@@ -38,7 +41,8 @@ const generateAIResponse = async (promptText, resultElement, buttonElement) => {
         resultElement.classList.remove("hidden");
     }
 
-    buttonElement.innerText = originalText;
+    textSpan.innerText = originalText;
+    buttonElement.style.opacity = "1";
     buttonElement.disabled = false;
 };
 

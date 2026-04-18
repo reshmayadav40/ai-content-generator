@@ -5,88 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Content Generator | Phase 4</title>
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    
     <!-- Link to custom CSS -->
     <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>✨ AI Content Generator</h1>
-            <p>Phase 4 Project: ES6+ JavaScript & Gemini API</p>
-        </div>
-    </header>
+    <!-- Animated Background Elements -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
 
-    <main class="container">
-        <div class="grid">
-            
-            <!-- Feature 1: Ask Me Anything -->
-            <section class="card">
-                <div class="card-header">
-                    <div class="icon">🤖</div>
-                    <h2>Ask Me Anything</h2>
+    <div class="glass-container">
+        <header>
+            <div class="header-content">
+                <div class="logo-wrapper">
+                    <span class="sparkle">✨</span>
                 </div>
-                <p>Ask any question and get an instant AI answer.</p>
-                <div class="input-area">
-                    <input type="text" id="ask-input" placeholder="Why is the sky blue?">
-                    <button id="ask-btn" class="btn">Ask AI</button>
-                </div>
-                <div id="ask-result" class="result hidden"></div>
-            </section>
+                <h1 class="gradient-text">Nova AI Suite</h1>
+                <p>Intelligent Content Generation Powered by Google Gemini</p>
+            </div>
+        </header>
 
-            <!-- Feature 2: Text Summarizer -->
-            <section class="card">
-                <div class="card-header">
-                    <div class="icon">📝</div>
-                    <h2>Text Summarizer</h2>
-                </div>
-                <p>Paste long text to get a quick summary.</p>
-                <div class="input-area">
-                    <textarea id="sum-input" placeholder="Paste article here..."></textarea>
-                    <button id="sum-btn" class="btn">Summarize</button>
-                </div>
-                <div id="sum-result" class="result hidden"></div>
-            </section>
+        <main class="container">
+            <div class="grid">
+                
+                <!-- Feature 1: Ask Me Anything -->
+                <section class="card glass">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <span class="icon">🤖</span>
+                        </div>
+                        <h2>Ask Me Anything</h2>
+                    </div>
+                    <p class="subtitle">Ask any question and get an instant, intelligent answer.</p>
+                    <div class="input-area">
+                        <input type="text" id="ask-input" placeholder="e.g., Why is the sky blue?">
+                        <button id="ask-btn" class="btn primary-btn">
+                            <span class="btn-text">Extract Answer</span>
+                            <div class="btn-loader hidden"></div>
+                        </button>
+                    </div>
+                    <div id="ask-result" class="result hidden"></div>
+                </section>
 
-            <!-- Feature 3: Idea Generator -->
-            <section class="card">
-                <div class="card-header">
-                    <div class="icon">💡</div>
-                    <h2>Idea Generator</h2>
-                </div>
-                <p>Get creative ideas for blogs, stories, or projects.</p>
-                <div class="input-area">
-                    <input type="text" id="idea-input" placeholder="e.g. Science Fiction Story">
-                    <button id="idea-btn" class="btn">Spark Ideas</button>
-                </div>
-                <div id="idea-result" class="result hidden"></div>
-            </section>
+                <!-- Feature 2: Text Summarizer -->
+                <section class="card glass">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <span class="icon">📝</span>
+                        </div>
+                        <h2>Text Summarizer</h2>
+                    </div>
+                    <p class="subtitle">Condense long articles down to their most crucial points.</p>
+                    <div class="input-area">
+                        <textarea id="sum-input" placeholder="Paste your long article or document here..."></textarea>
+                        <button id="sum-btn" class="btn primary-btn">
+                            <span class="btn-text">Summarize Text</span>
+                            <div class="btn-loader hidden"></div>
+                        </button>
+                    </div>
+                    <div id="sum-result" class="result hidden"></div>
+                </section>
 
-            <!-- Feature 4: Definition Finder -->
-            <section class="card">
-                <div class="card-header">
-                    <div class="icon">📖</div>
-                    <h2>Definition Finder</h2>
-                </div>
-                <p>Get a simple definition for any complex word.</p>
-                <div class="input-area">
-                    <input type="text" id="def-input" placeholder="e.g. Ephemeral">
-                    <button id="def-btn" class="btn">Define</button>
-                </div>
-                <div id="def-result" class="result hidden"></div>
-            </section>
+                <!-- Feature 3: Idea Generator -->
+                <section class="card glass">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <span class="icon">💡</span>
+                        </div>
+                        <h2>Idea Generator</h2>
+                    </div>
+                    <p class="subtitle">Overcome writer's block. Get creative ideas for any topic.</p>
+                    <div class="input-area">
+                        <input type="text" id="idea-input" placeholder="e.g., Sci-Fi short story concepts">
+                        <button id="idea-btn" class="btn primary-btn">
+                            <span class="btn-text">Ignite Ideas</span>
+                            <div class="btn-loader hidden"></div>
+                        </button>
+                    </div>
+                    <div id="idea-result" class="result hidden"></div>
+                </section>
 
-        </div>
-    </main>
+                <!-- Feature 4: Definition Finder -->
+                <section class="card glass">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <span class="icon">📖</span>
+                        </div>
+                        <h2>Definition Finder</h2>
+                    </div>
+                    <p class="subtitle">Break down complex jargon into simple, bite-sized examples.</p>
+                    <div class="input-area">
+                        <input type="text" id="def-input" placeholder="e.g., Ephemeral, Quantum Entanglement">
+                        <button id="def-btn" class="btn primary-btn">
+                            <span class="btn-text">Define Word</span>
+                            <div class="btn-loader hidden"></div>
+                        </button>
+                    </div>
+                    <div id="def-result" class="result hidden"></div>
+                </section>
 
-    <footer>
-        <p>Built with Vanilla JS (ES6+) and Google Gemini API</p>
-    </footer>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with <span class="heart">♥</span> using ES6+ and Gemini SDK</p>
+        </footer>
+    </div>
 
     <!-- Main Logic Script -->
     <script type="module" src="script.js"></script>
-
 
 </body>
 </html>
