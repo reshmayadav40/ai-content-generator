@@ -318,6 +318,24 @@ textarea {
     line-height: 1.7;
     animation: slideDown 0.4s ease-out;
     position: relative;
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #a855f7 rgba(15, 23, 42, 0.5);
+}
+
+.result::-webkit-scrollbar {
+    width: 6px;
+}
+
+.result::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 10px;
+}
+
+.result::-webkit-scrollbar-thumb {
+    background: #a855f7;
+    border-radius: 10px;
 }
 
 .result::before {
