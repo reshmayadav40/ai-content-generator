@@ -13,8 +13,8 @@ const generateAIResponse = async (promptText, resultElement, buttonElement) => {
     resultElement.innerText = "";
 
     try {
-        // Automatically route to the correct backend if you are accidentally using VS Code Live Server
-        const baseUrl = window.location.port === '5500' ? 'http://localhost:3000' : '';
+        // Route to the live Render backend so you don't even need to run a local server
+        const baseUrl = 'https://ai-content-generator-9036.onrender.com';
         
         const response = await fetch(`${baseUrl}/api/generate`, {
             method: 'POST',
