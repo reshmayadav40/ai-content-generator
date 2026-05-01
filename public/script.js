@@ -16,12 +16,14 @@ const generateAIResponse = async (promptText, resultElement, buttonElement) => {
     resultElement.innerText = "";
 
     try {
-        // Dynamically determine the backend URL to support VS Code Live Server (port 5500)
-        // If running on localhost but not on port 3000, point to the Express server at 3000
-        const isLocalDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const backendUrl = (isLocalDevelopment && window.location.port !== '3000') 
-            ? 'http://localhost:3000/api/generate' 
-            : '/api/generate';
+        // Dynamically determine the backend URL
+        const isLocalNodeServer = window.location.hostname === 'localhost' && window.location.port === '3000';
+        const isRenderProduction = window.location.hostname.includes('onrender.com');
+        
+        // If running on Live Server (5500) or elsewhere, use the live Render backend!
+        const backendUrl = (isLocalNodeServer || isRenderProduction) 
+            ? '/api/generate' 
+            : 'https://ai-content-generator-1-bdtj.onrender.com/api/generate';
 
         const response = await fetch(backendUrl, {
             method: 'POST',
