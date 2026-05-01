@@ -30,9 +30,29 @@ app.post('/api/generate', async (req, res) => {
             return res.status(400).json({ error: "promptText is required" });
         }
 
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-        const result = await model.generateContent(promptText);
-        const text = result.response.text();
+        // Robust Fallback System: Try valid supported models
+        const modelsToTry = ["gemini-2.5-flash-lite", "gemini-2.0-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash"];
+        let text = null;
+        let lastError = null;
+
+        for (const modelName of modelsToTry) {
+            try {
+                console.log(`[API] Attempting generation with model: ${modelName}`);
+                const model = genAI.getGenerativeModel({ model: modelName });
+                const result = await model.generateContent(promptText);
+                text = result.response.text();
+                console.log(`[API] Success using model: ${modelName}`);
+                break; // Success! Exit the loop
+            } catch (err) {
+                console.warn(`[API] Model ${modelName} failed: ${err.message}`);
+                lastError = err;
+                // Loop continues and tries the next model
+            }
+        }
+
+        if (!text) {
+            throw new Error(`All fallback models failed due to high demand. Last error: ${lastError?.message}`);
+        }
 
         res.json({ text });
     } catch (error) {

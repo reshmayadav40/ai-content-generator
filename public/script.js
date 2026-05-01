@@ -16,10 +16,14 @@ const generateAIResponse = async (promptText, resultElement, buttonElement) => {
     resultElement.innerText = "";
 
     try {
-        // Route to the live Render backend so you don't even need to run a local server
-        const baseUrl = 'https://ai-content-generator-9036.onrender.com';
-        
-        const response = await fetch(`${baseUrl}/api/generate`, {
+        // Dynamically determine the backend URL to support VS Code Live Server (port 5500)
+        // If running on localhost but not on port 3000, point to the Express server at 3000
+        const isLocalDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const backendUrl = (isLocalDevelopment && window.location.port !== '3000') 
+            ? 'http://localhost:3000/api/generate' 
+            : '/api/generate';
+
+        const response = await fetch(backendUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +44,6 @@ const generateAIResponse = async (promptText, resultElement, buttonElement) => {
         resultElement.innerText = "⚠️ Error: " + error.message;
         resultElement.classList.remove("hidden");
     }
-
     textSpan.innerText = originalText;
     buttonElement.style.opacity = "1";
     buttonElement.disabled = false;
